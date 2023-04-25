@@ -1,10 +1,12 @@
 <template>
   <h1>{{ name }}</h1>
+  <input type="text" v-model="name">
   <button @click="placeOrder">Place Order</button>
-  <YummyMeal name="Hamburger" :price="5" @addToCart="addItemToCart" />
+  <YummyMeal :name="meal.name" :price="meal.price" @addToCart="addItemToCart" />
 </template>
 
 <script>
+import { ref, reactive } from 'vue';
 import YummyMeal from './components/YummyMeal.vue';
 
 export default {
@@ -12,13 +14,15 @@ export default {
     YummyMeal,
   },
   setup() {
-    const name = 'The Snazzy Burger';
+    const name = ref('The Snazzy Burger');
+    const meal = reactive({ name: 'Hamburger', price: 5 });
 
     const placeOrder = () => alert('You re order has been placed!');
     const addItemToCart = (item) => alert(`One ${item} added to the cart!`);
 
     return {
       name,
+      meal,
       placeOrder,
       addItemToCart,
     }
