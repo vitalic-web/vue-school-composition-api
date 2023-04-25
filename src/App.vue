@@ -1,18 +1,21 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <h1>{{ name }}</h1>
+  <button @click="placeOrder">Place Order</button>
 </template>
+
+<script>
+export default {
+  setup() {
+    const name = 'The Snazzy Burger';
+    const placeOrder = () => alert('You re order has been placed!');
+
+    return {
+      name,
+      placeOrder,
+    }
+  }
+}
+</script>
 
 <style scoped>
 .logo {
