@@ -3,6 +3,12 @@
   <input type="text" v-model="name">
   <button @click="placeOrder">Place Order</button>
   <button @click="removeWatcher">Hide Cart Alerts</button>
+	<br><br>
+	<label for="currencySymbol">Currency</label>
+	<select id="currencySymbol" v-model="currencySymbol">
+		<option value="$">Dollars ($)</option>
+		<option value="£">Pound (£)</option>
+	</select>
   <YummyMeal
 		v-for="meal in meals"
 		:name="meal.name"
@@ -12,7 +18,7 @@
 </template>
 
 <script>
-import { ref, reactive, watch } from 'vue';
+import { ref, reactive, watch, provide } from 'vue';
 import YummyMeal from './components/YummyMeal.vue';
 
 export default {
@@ -20,9 +26,13 @@ export default {
     YummyMeal,
   },
   setup() {
+    const currencySymbol = ref('$');
+    // provide('currencySymbol', currencySymbol);
+
     const name = ref('The Snazzy Burger');
     const cart = reactive([]);
     const meal = reactive({ name: 'Hamburger', price: 5 });
+
     const meals = reactive([
       { name: 'Hamburger', price: 5 },
       { name: 'Cheeseburger', price: 6 },
@@ -46,6 +56,7 @@ export default {
       placeOrder,
       addItemToCart,
       removeWatcher,
+      currencySymbol,
     }
   }
 }
