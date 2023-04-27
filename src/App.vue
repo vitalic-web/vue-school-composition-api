@@ -17,49 +17,32 @@
 	/>
 </template>
 
-<script>
+<script setup>
 import { ref, reactive, watch, provide } from 'vue';
 import YummyMeal from './components/YummyMeal.vue';
 
-export default {
-  components: {
-    YummyMeal,
-  },
-  setup() {
-    const currencySymbol = ref('$');
-    // provide('currencySymbol', currencySymbol);
+const currencySymbol = ref('$');
+// provide('currencySymbol', currencySymbol);
 
-    const name = ref('The Snazzy Burger');
-    const cart = reactive([]);
-    const meal = reactive({ name: 'Hamburger', price: 5 });
+const name = ref('The Snazzy Burger');
+const cart = reactive([]);
+const meal = reactive({ name: 'Hamburger', price: 5 });
 
-    const meals = reactive([
-      { name: 'Hamburger', price: 5 },
-      { name: 'Cheeseburger', price: 6 },
-      { name: 'Impossible Burger', price: 7 },
-      { name: 'Fries', price: 2 },
-		]);
+const meals = reactive([
+  { name: 'Hamburger', price: 5 },
+  { name: 'Cheeseburger', price: 6 },
+  { name: 'Impossible Burger', price: 7 },
+  { name: 'Fries', price: 2 },
+]);
 
-    const placeOrder = () => alert('You re order has been placed!');
-    const addItemToCart = (item) => cart.push(item);
+const placeOrder = () => alert('You re order has been placed!');
+const addItemToCart = (item) => cart.push(item);
 
-    const removeWatcher = watch(
-      () => [...cart],
-			(newValue, oldValue) => {
-      alert(newValue.join('\n'));
-		});
-
-    return {
-      name,
-      meal,
-      meals,
-      placeOrder,
-      addItemToCart,
-      removeWatcher,
-      currencySymbol,
-    }
-  }
-}
+const removeWatcher = watch(
+  () => [...cart],
+  (newValue, oldValue) => {
+		alert(newValue.join('\n'));
+});
 </script>
 
 <style scoped>
